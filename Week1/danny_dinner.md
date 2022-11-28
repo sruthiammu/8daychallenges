@@ -39,6 +39,26 @@ select m.product_name,count(m.product_name) as count
 
 ## 5.Which item was the most popular for each customer?
 ```sql
+with subtable as (
+select s.customer_id,m.product_name,count(m.product_id)as count,DENSE_RANK() OVER(partition by s.customer_id 
+order by count(m.product_id) desc) as rn from sales s inner join menu m on s.product_id=m.product_id 
+group by s.customer_id,m.product_name)
 
+select customer_id,product_name,count from subtable where rn=1;
 ```
+![sql15](https://user-images.githubusercontent.com/67575229/204222159-982f9b81-9ba7-4981-a00b-8505c456cb32.png)
+
+## 6.Which item was purchased first by the customer after they became a member?
+```sql
+with purchase as (select mm.customer_id,m.product_name,mm.join_date,s.order_date,
+dense_rank() over(partition by mm.customer_id order by s.order_date asc) as first_purchase from members  mm join sales s 
+using(customer_id)
+join menu m on s.product_id=m.product_id
+where s.order_date>= mm.join_date)
+
+select customer_id,product_name from purchase where first_purchase=1
+```
+
+![sql16](https://user-images.githubusercontent.com/67575229/204245955-4d887ec4-2c38-4a0f-a297-beb7d405c7cc.png)
+
 
