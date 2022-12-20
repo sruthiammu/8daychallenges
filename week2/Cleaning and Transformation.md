@@ -84,3 +84,4 @@ modify distance float,
 modify duration int
 ```
 
+### click here [solution](https://github.com/sruthiammu/8daychallenges/commit/23a3832269d553f9a174ae3337ffc258b8ba2d1a)  for A.pizza matrics
