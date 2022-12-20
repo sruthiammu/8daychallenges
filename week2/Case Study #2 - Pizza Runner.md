@@ -15,10 +15,4 @@ something with some of those null values and data types in the customer_orders a
 
    # A.Pizza Metrics
    
-   
-## 1.How many pizzas were ordered?
 
-`sql
-
-
-`
