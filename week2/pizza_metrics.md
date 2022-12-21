@@ -57,3 +57,34 @@ select max(pizza_count_perorder) max_count from tem
 
 ![p10](https://user-images.githubusercontent.com/67575229/208849038-9c4134e2-cf08-4dac-a524-24eb78353342.png)
 
+# 7) For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+
+
+```sql
+select c.customer_id,sum(case
+	when c.exclusions<>'0' or c.extras<>'0' then 1
+    else 0
+    end) as atleast_one_change,
+    sum(case when c.exclusions ='0' or c.extras ='0' then 1
+    else 0
+    end) as no_changes
+    from customer_order_cln c join runner_orders_cln r on c.order_id=r.order_id
+where r.distance <>0
+group by c.customer_id
+```
+![p11](https://user-images.githubusercontent.com/67575229/208877796-66e1384f-b0b6-4b69-a52c-8125b13f1704.png)
+
+
+# 8)How many pizzas were delivered that had both exclusions and extras?
+
+```sql
+select sum( case when c.exclusions is not null and c.extras is not null then 1 else 0 end) delivered_pizza_having_both
+from customer_order_cln c join runner_orders_cln r on c.order_id=r.order_id
+where r.distance<>0
+and c.exclusions<>'0'
+and c.extras<>'0'
+group by c.customer_id
+```
+![p12](https://user-images.githubusercontent.com/67575229/208880690-0cf8e137-26ec-462e-8ee0-b8bd26b750b2.png)
+
+
