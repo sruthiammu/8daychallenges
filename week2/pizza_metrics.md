@@ -87,4 +87,20 @@ group by c.customer_id
 ```
 ![p12](https://user-images.githubusercontent.com/67575229/208880690-0cf8e137-26ec-462e-8ee0-b8bd26b750b2.png)
 
+# 9) What was the total volume of pizzas ordered for each hour of the day?
+
+```sql
+SELECT 
+  extract(hour from order_time) hour_of_day,count(*) pizza_count
+  from customer_order_cln
+  group by extract(hour from order_time)
+  order by hour_of_day;
+  ```
+  
+![p13](https://user-images.githubusercontent.com/67575229/209096312-8d275876-bb92-4742-8aef-6561f80b2598.png)
+
+
+# 10) What was the volume of orders for each day of the week?
+
+```sql
 
