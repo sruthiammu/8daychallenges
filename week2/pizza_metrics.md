@@ -104,3 +104,6 @@ SELECT
 
 ```sql
 
+```
+
+click here for the [solution](https://github.com/sruthiammu/8daychallenges/blob/main/week2/Runner%20%26%20customer%20experience.md) of B) Runner & customer experience
